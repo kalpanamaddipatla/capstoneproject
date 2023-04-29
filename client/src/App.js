@@ -36,8 +36,8 @@ const App = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(); // object for storing data for MONGODB
-    const formData1 = new FormData(); // object for storing data for S3
+ 
+    const formData1 = new FormData(); 
     formData.append('title', movie.title);
     formData.append('director', movie.director);
     formData.append('releaseYear', movie.releaseYear);
@@ -46,18 +46,14 @@ const App = () => {
 
     try {
 
-      // posting data to s3
+     
       const res1 = await axios.post(`${url}/upload`, formData1, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
 
-      // posting data to mongoDB
-      const res = await axios.post(`${url}/api/movies`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+  
       });
       setMovie({ poster: null});
       toast.success("Movie Uploaded Successfully!");
